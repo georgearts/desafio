@@ -1,16 +1,28 @@
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
+const sequelize = require('../utils/db');
 
-const Tarefas = (sequelize, DataTypes) => {
-  const Tarefas = sequelize.define('Tarefas', {
+const Tarefas = sequelize.define('tarefas', {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
     },
-    titulo: DataTypes.STRING,
-    descricao: DataTypes.STRING,
-    status: DataTypes.STRING,
-  });
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'O campo "nome" não pode estar vazio.',
+            },
+            notNull: {
+                msg: 'O campo "nome" é obrigatório.',
+            },
+        },
+    }  
+}, {
+    schema: 'teste',
+    tableName: 'tarefas',
+    timestamps: false
+});
 
-  return Tarefas;
-};
+module.exports = { Tarefas };

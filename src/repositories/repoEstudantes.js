@@ -6,7 +6,6 @@ function visualizarEstudantes() {
 }
 
 async function criarEstudante({ cpf, nome, cursoId, matricula }) {
-    console.log(`${cpf, nome, cursoId, matricula} chegou`);
     const curso = cursoId;
     const existingEstudante = await Estudantes.findOne({ where: { cpf } });
     if (existingEstudante) {

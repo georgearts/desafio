@@ -27,7 +27,6 @@ const Cursos = sequelize.define('cursos', {
   });
   
    
-  const modelCursos = { Cursos };
   
-  module.exports = modelCursos;
+  module.exports = { Cursos };
 

@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utils/db');
-const Cursos = require('./Cursos');
+const { Cursos } = require('./Cursos');
 
-const Estudantes = sequelize.define('Estudantes', {     
+const Estudantes = sequelize.define('estudantes', {     
   cpf: {
     type: Sequelize.STRING,
     unique: true,
