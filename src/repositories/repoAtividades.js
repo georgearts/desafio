@@ -18,28 +18,31 @@ async function criarAtividade(tarefaId, estudanteId, data, horaAgendamentoInicio
     return atividade;
 }
 
-async function atualizarAtividade(id, dadosAtividade) {
-    const { tarefaId, estudanteId, data, horaAgendamentoInicio, horaAgendamentoTermino, horaInicio, horaTermino } = dadosAtividade;
+async function atualizarAtividade(id, dadosAtividade, horaInicio, horaTermino) {
+    const { tarefaId, estudanteId, data, horaAgendamentoInicio, horaAgendamentoTermino } = dadosAtividade;
     const atividadeExistente = await Atividades.findOne({ where: { id } });
     if (!atividadeExistente) {
         throw new Error('Atividade não existe');
     }
-    const atividade = await Atividades.update(
-        {
-            tarefaId,
-            estudanteId,
-            data,
-            horaAgendamentoInicio,
-            horaAgendamentoTermino,
-            horaInicio,
-            horaTermino
-        },
-        {
-            where: {
-                id
-            }
+    
+    let updateData = {};
+
+    // Se horaInicio e horaTermino forem undefined, atualiza todos os outros campos
+    if (horaInicio === undefined && horaTermino === undefined) {
+        updateData = dadosAtividade;
+    } else {
+        // Se horaInicio não for undefined, atualiza horaInicio
+        if (horaInicio !== undefined) {
+            updateData.horaInicio = horaInicio;
         }
-    );
+
+        // Se horaTermino não for undefined, atualiza horaTermino
+        if (horaTermino !== undefined) {
+            updateData.horaTermino = horaTermino;
+        }
+    }
+
+    const atividade = await Atividades.update(updateData, { where: { id } });
 
     return atividade;
 }
@@ -68,6 +71,6 @@ async function visualizarAtividadePorId(id) {
     }
 }
 
-const repoAtividades = { visualizarAtividades, criarAtividade, atualizarAtividade, excluirAtividade };
+const repoAtividades = { visualizarAtividades, criarAtividade, atualizarAtividade, excluirAtividade , visualizarAtividadePorId};
 
 module.exports = repoAtividades;

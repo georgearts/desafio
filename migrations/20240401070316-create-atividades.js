@@ -32,11 +32,11 @@ module.exports = {
             allowNull: false
         },
         horaAgendamentoInicio: {
-            type: Sequelize.TIME,
+            type: Sequelize.STRING,
             allowNull: false
         },
         horaAgendamentoTermino: {
-            type: Sequelize.TIME,
+            type: Sequelize.STRING,
             allowNull: false
         },
         horaInicio: {

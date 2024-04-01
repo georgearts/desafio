@@ -32,11 +32,11 @@ const Atividades = sequelize.define('atividades', {
         allowNull: false
     },
     horaAgendamentoInicio: {
-        type: Sequelize.TIME,
+        type: Sequelize.STRING,
         allowNull: false
     },
     horaAgendamentoTermino: {
-        type: Sequelize.TIME,
+        type: Sequelize.STRING,
         allowNull: false
     },
     horaInicio: {
