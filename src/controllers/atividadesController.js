@@ -30,7 +30,7 @@ function atividadesController() {
             const atividade = await repoAtividades.criarAtividade(tarefaId, estudanteId, data, dataInicio, horaAgendamentoTermino);
             res.status(201).json({ message: `Atividade ${atividade.data} com Hora de início ${atividade.horaAgendamentoInicio} criada com sucesso` });
         } catch (error) {
-            res.status(500).json({  message: `Não foi possivel registrar nova atividade: ${error.message}` });
+            res.status(500).json({ message: `Não foi possivel registrar nova atividade: ${error.message}` });
         }
     }
 
