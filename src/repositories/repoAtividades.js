@@ -20,7 +20,7 @@ async function criarAtividade(tarefaId, estudanteId, data, horaAgendamentoInicio
 
 async function atualizarAtividade(id, dadosAtividade) {
     const { tarefaId, estudanteId, data, horaAgendamentoInicio, horaAgendamentoTermino, horaInicio, horaTermino } = dadosAtividade;
-    const atividadeExistente = await visualizarAtividadePorId(id);
+    const atividadeExistente = await Atividades.findOne({ where: { id } });
     if (!atividadeExistente) {
         throw new Error('Atividade não existe');
     }

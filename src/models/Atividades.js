@@ -19,10 +19,10 @@ const Atividades = sequelize.define('atividades', {
         allowNull: false
     },
     estudanteId: {
-        type: Sequelize.UUID,
+        type: Sequelize.STRING,
         references: {
             model: Estudantes,
-            key: 'id'
+            key: 'cpf'
         },
         onDelete: 'CASCADE',
         allowNull: false

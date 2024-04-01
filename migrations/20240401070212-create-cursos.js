@@ -25,7 +25,6 @@ module.exports = {
       schema: 'teste',
       tableName: 'cursos',
       timestamps: false
-    
     });
   },
 

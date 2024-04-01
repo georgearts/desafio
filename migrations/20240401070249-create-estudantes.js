@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
         primaryKey: true,
-        allowNull: false,
+        allowNull:false,
         validate: {
           is: {
             args: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
@@ -48,7 +48,7 @@ module.exports = {
       },
     }, {
       schema: 'teste',
-      tableName: 'cursos',
+      tableName: 'estudantes',
       timestamps: false
     });
   },

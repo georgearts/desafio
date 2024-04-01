@@ -8,7 +8,7 @@ function visualizarTarefas() {
 async function criarTarefa(nome) {
     console.log(`${nome} chegou`);
     const existingTarefa = await Tarefas.findOne({ where: { nome } });
-    if (!existingTarefa) {
+    if (existingTarefa) {
         throw new Error('Tarefa já existe');
     }
     const tarefa = await Tarefas.create({
@@ -21,8 +21,8 @@ async function criarTarefa(nome) {
 
 async function atualizarTarefa(id, nome) {
     const existingTarefa = await Tarefas.findOne({ where: { id } });
-    if (existingTarefa) {
-        throw new Error('Tarefa já existe');
+    if (!existingTarefa) {
+        throw new Error('Tarefa não existe');
     }
 
     const tarefa = await Tarefas.update(
@@ -47,20 +47,11 @@ function excluirTarefa(id) {
     });
 }
 
-
-
 async function buscarTarefaPorNome(nomeTarefa) {
     const nome = nomeTarefa;
-    try {
-        const tarefa = await Tarefas.findOne({ where: { nome } });
-        if (!tarefa) {
-            return res.status(404).json({ message: 'Tarefa não encontrada' });
-        }
-        res.status(200).json(tarefa);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao executar essa função" });
-    }
-}
+    const tarefa = await Tarefas.findOne({ where: { nome } });
+    return tarefa ? tarefa.id : null;
+  }
 
 const repoTarefas = { visualizarTarefas, criarTarefa, atualizarTarefa, excluirTarefa, buscarTarefaPorNome };
 
